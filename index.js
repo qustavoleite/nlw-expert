@@ -85,7 +85,7 @@ const quiz = document.querySelector("#quiz")
 const template = document.querySelector("template")
 const corretas = new Set()
 
-const totalDePerguntas = perguntas.lenght
+const totalDePerguntas = perguntas.length
 const mostrarTotal = document.querySelector("#acertos span")
 mostrarTotal.textContent = corretas.size + " de " + totalDePerguntas
 
@@ -101,7 +101,10 @@ for (const item of perguntas) {
     dt.querySelector("span").textContent = resposta
 
     //pegamos o input que esta dentro de dt e definimos o atributo name do alemento input como uma string
-    dt.querySelector("input").setAttribute("name", "pergunta-" + perguntas.indexOf(item))
+    dt.querySelector("input").setAttribute(
+      "name",
+      "pergunta-" + perguntas.indexOf(item)
+    )
 
     dt.querySelector("input").value = item.respostas.indexOf(resposta) //encontra o índice da resposta atual no array de respostas da pergunta.
 
@@ -113,7 +116,7 @@ for (const item of perguntas) {
       if (estaCorreta) {
         corretas.add(item)
       }
-      
+
       mostrarTotal.textContent = corretas.size + " de " + totalDePerguntas
     }
 
