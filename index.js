@@ -89,27 +89,22 @@ const totalDePerguntas = perguntas.length
 const mostrarTotal = document.querySelector("#acertos span")
 mostrarTotal.textContent = corretas.size + " de " + totalDePerguntas
 
-//pecorre sobre os elementos do array
 for (const item of perguntas) {
-  const quizItem = template.content.cloneNode(true) //faz uma copia de todo o conteudo da tag template5
+  const quizItem = template.content.cloneNode(true)
   quizItem.querySelector("h3").textContent = item.pergunta
 
-  //pecorre sobre os objetos que estao dentro do array e pega a propriedade respostas
   for (let resposta of item.respostas) {
-    //pegamos o dt e clonamos o seu conteudo para colocar as alternativas das perguntas
     const dt = quizItem.querySelector("dl dt").cloneNode(true)
     dt.querySelector("span").textContent = resposta
 
-    //pegamos o input que esta dentro de dt e definimos o atributo name do alemento input como uma string
     dt.querySelector("input").setAttribute(
       "name",
       "pergunta-" + perguntas.indexOf(item)
     )
 
-    dt.querySelector("input").value = item.respostas.indexOf(resposta) //encontra o índice da resposta atual no array de respostas da pergunta.
+    dt.querySelector("input").value = item.respostas.indexOf(resposta)
 
     dt.querySelector("input").onchange = (event) => {
-      //alert(event.target.value)
       const estaCorreta = event.target.value == item.correta
 
       corretas.delete(item)
@@ -120,13 +115,10 @@ for (const item of perguntas) {
       mostrarTotal.textContent = corretas.size + " de " + totalDePerguntas
     }
 
-    //mostra na tela as alternativas das perguntas
     quizItem.querySelector("dl").appendChild(dt)
   }
 
-  //remove o conteudo "Resposta A" da tag span
   quizItem.querySelector("dl dt").remove()
 
-  // coloca a pergunta na tela
   quiz.appendChild(quizItem)
 }
